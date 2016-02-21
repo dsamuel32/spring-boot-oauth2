@@ -25,7 +25,7 @@ public class NormalToken implements GeradorToken {
     
     private String scope;
 
-    private static final Long TEMPO_EXPIRAR = 3000000L;
+    private static final Long TEMPO_EXPIRAR = 1800000L;
 
     public NormalToken(String userName, String tipoToken, List<String> roles, String scope) {
         this.userName = userName;
@@ -73,6 +73,14 @@ public class NormalToken implements GeradorToken {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
     }
 
 }

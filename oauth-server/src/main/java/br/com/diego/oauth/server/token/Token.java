@@ -9,7 +9,9 @@ import br.com.diego.oauth.server.dtos.TokenDTO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
+import java.util.Date;
 import java.util.List;
 import javax.validation.ValidationException;
 
@@ -60,13 +62,10 @@ public class Token {
         Token token = Token.getInstance();
 
         try {
-            final Claims claims = token.verificarTokenValido(tokenDTO.getToken());
-            return criaTokenDTO(claims);
-        } catch (SignatureException e) {
-            throw new ValidationException("Token invalido.");
-        } catch (ExpiredJwtException e) {
             final Claims claims = token.verificarTokenValido(tokenDTO.getRefreshToken());
             return criaTokenDTO(claims);
+        } catch (SignatureException | ExpiredJwtException e) {
+            throw new ValidationException("Token invalido.");
         }
     }
 

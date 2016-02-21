@@ -7,7 +7,10 @@ package br.com.diego.oauth.server.service;
 
 import br.com.diego.oauth.server.dtos.RequestTokenDTO;
 import br.com.diego.oauth.server.exceptions.AutenticacaoException;
+import br.com.diego.oauth.server.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -16,10 +19,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioService {
 
-    public Boolean autenticar(RequestTokenDTO requestTokenDTO) throws AutenticacaoException {
-        if (Boolean.TRUE) {
-            return Boolean.TRUE;
-        } else {
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Transactional(readOnly = true)
+    public void autenticar(RequestTokenDTO requestTokenDTO) throws AutenticacaoException {
+        if (!usuarioRepository.isAtenticarUsuario(requestTokenDTO.getUserName(), requestTokenDTO.getPassword(), requestTokenDTO.getClientId())) {
             throw new AutenticacaoException("Usuário ou senha invalidos");
         }
     }

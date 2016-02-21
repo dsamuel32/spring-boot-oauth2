@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -36,9 +37,10 @@ public class Usuario implements Serializable {
     @Column(name = "NOME")
     private String nome;
 
-    @Column(name = "USERNAME")
+    @Column(name = "USER_NAME")
     private String userName;
 
+    @Lob
     @Column(name = "PASSWORD")
     private String password;
 
@@ -47,9 +49,16 @@ public class Usuario implements Serializable {
         @JoinColumn(name = "USUARIO_ID")}, inverseJoinColumns = {
         @JoinColumn(name = "ROLE_ID")})
     private Set<Role> roles;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USUARIO_SISTEMA", joinColumns = {
+        @JoinColumn(name = "USUARIO_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "SISTEMA_ID")})
+    private Set<Sistema> sistemas;
 
     public Usuario() {
-        roles = new HashSet<Role>();
+        roles = new HashSet<>();
+        sistemas = new HashSet<>();
     }
 
     public Long getId() {
@@ -86,6 +95,14 @@ public class Usuario implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<Sistema> getSistemas() {
+        return sistemas;
+    }
+
+    public void setSistemas(Set<Sistema> sistemas) {
+        this.sistemas = sistemas;
     }
 
     @Override

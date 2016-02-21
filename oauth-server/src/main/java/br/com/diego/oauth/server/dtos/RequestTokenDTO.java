@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author Diego NOTE
  */
 public class RequestTokenDTO implements Serializable {
-    
+    //{"userName" : "teste@teste.com", "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "clientId": "646514d85279c63c7aacbc7a91e7575bd2d1adcb0086c45840242b090c69cc08", "grantType": "password", "scope" :"API"}
     private String userName;
     
     private String password;

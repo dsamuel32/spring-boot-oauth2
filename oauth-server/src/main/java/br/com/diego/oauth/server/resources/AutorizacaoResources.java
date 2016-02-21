@@ -18,7 +18,11 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.diego.oauth.server.exceptions.AutenticacaoException;
+import br.com.diego.oauth.server.exceptions.ClienteIdException;
+import br.com.diego.oauth.server.service.SistemaService;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.validation.ValidationException;
 import javax.ws.rs.GET;
 
@@ -27,25 +31,31 @@ import javax.ws.rs.GET;
  * @author Diego NOTE
  */
 @RestController
-@Path("api-autorizacao")
+@Path("api/autorizacao")
 @Produces(MediaType.APPLICATION_JSON)
 public class AutorizacaoResources {
 
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    private SistemaService sistemaService;
 
     @Path("request-token")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response requestToken(RequestTokenDTO requestTokenDTO) {
+        
         try {
+            sistemaService.verificarClienteIdValido(requestTokenDTO.getClientId());
             usuarioService.autenticar(requestTokenDTO);
             Token token = Token.getInstance();
             TokenDTO tokenDTO = 
                     new TokenDTO(token.gerarNormalToken(requestTokenDTO.getUserName(), requestTokenDTO.getGrantType(), new ArrayList<>(), requestTokenDTO.getScope()), 
                                  token.gerarRefreshToken(requestTokenDTO.getUserName(),requestTokenDTO.getGrantType(), new ArrayList<>(), requestTokenDTO.getScope()));
             return Response.ok(tokenDTO).build();
-        } catch (AutenticacaoException e) {
+        } catch (AutenticacaoException | ClienteIdException e) {
+            Logger.getLogger(AutorizacaoResources.class.getName()).log(Level.SEVERE, null, e);
             return Response.ok().status(Response.Status.UNAUTHORIZED).build();
         }
 

@@ -15,11 +15,22 @@ import java.security.NoSuchAlgorithmException;
  */
 public class CriptografiaUtil {
 
-    public static String encriptografar(String clientId, Long time, String applicationKey) {
+    public static String encriptografar(String clientId,String applicationKey) {
         try {
 
-            String key = clientId + time + applicationKey;
+            String key = clientId + applicationKey;
 
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(key.getBytes("UTF-8"));
+            return montarHash(hash);
+            
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    public static String encriptografar(String key) {
+        try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(key.getBytes("UTF-8"));
             return montarHash(hash);
@@ -42,5 +53,10 @@ public class CriptografiaUtil {
 
         return hexString.toString();
     }
+    
+//    public static void main(String... args) {
+//        //02e4d717610414854b33e7e521d9a19087012701e04078810c84190bfc65637f
+//        System.out.println(encriptografar("1234"));
+//    }
 
 }

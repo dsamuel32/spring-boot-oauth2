@@ -9,14 +9,14 @@ package br.com.diego.oauth.server.exceptions;
  *
  * @author Diego NOTE
  */
-public class AutenticacaoException extends Exception {
+public class ClienteIdException extends Exception {
 
-    public AutenticacaoException() {
-        super("Usuário ou senha inválidos");
+    public ClienteIdException() {
+        super("Cliente Id inválido.");
     }
 
-    public AutenticacaoException(String message) {
+    public ClienteIdException(String message) {
         super(message);
     }
-
+    
 }

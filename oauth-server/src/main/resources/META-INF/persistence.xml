@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.com.diego.oauth.server.entidades.Usuario</class>
     <class>br.com.diego.oauth.server.entidades.Role</class>
+    <class>br.com.diego.oauth.server.entidades.Sistema</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/controleacesso?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
