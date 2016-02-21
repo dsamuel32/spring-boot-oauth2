@@ -22,7 +22,7 @@ public class MainApplication {
 	public FilterRegistrationBean jwtFilter() {
 		final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
 		registrationBean.setFilter(new ValidadorFilter());
-		registrationBean.addUrlPatterns("/api/security/*");
+		registrationBean.addUrlPatterns("/api/privado/*");
 
 		return registrationBean;
 	}
