@@ -1,2 +1,2 @@
 # servidor-autenticacao-oauth2
-Projeto demostra a geração de token utilizando JWT e autenticação utilizando o token gerado.
+Projeto desenvolvido na linguagem Java utilizando o freamework Spring (Spring Boot), JPA, JWT para geração de tokens e Flyway para versionamento do banco de dados.
