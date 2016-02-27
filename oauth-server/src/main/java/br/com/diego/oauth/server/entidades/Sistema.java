@@ -31,8 +31,8 @@ public class Sistema implements Serializable {
     private String nome;
     
     @Lob
-    @Column(name = "CLIENT_ID")    
-    private String clientId;
+    @Column(name = "CLIENT_SECRET")    
+    private String clientSecret;
 
     public Long getId() {
         return id;
@@ -50,19 +50,12 @@ public class Sistema implements Serializable {
         this.nome = nome;
     }
 
-    public String getClientId() {
-        return clientId;
+    public String getClientSecret() {
+        return clientSecret;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
     }
 
     @Override

@@ -7,6 +7,7 @@ package br.com.diego.oauth.server.resources;
 
 import br.com.diego.oauth.server.dtos.RequestTokenDTO;
 import br.com.diego.oauth.server.dtos.TokenDTO;
+import br.com.diego.oauth.server.entidades.Acesso;
 import br.com.diego.oauth.server.service.UsuarioService;
 import br.com.diego.oauth.server.token.Token;
 import javax.ws.rs.Consumes;
@@ -19,19 +20,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.diego.oauth.server.exceptions.AutenticacaoException;
 import br.com.diego.oauth.server.exceptions.ClienteIdException;
+import br.com.diego.oauth.server.service.AcessoService;
 import br.com.diego.oauth.server.service.SistemaService;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.validation.ValidationException;
-import javax.ws.rs.GET;
 
 /**
  *
  * @author Diego NOTE
  */
 @RestController
-@Path("api/autorizacao")
+@Path("api/oauth")
 @Produces(MediaType.APPLICATION_JSON)
 public class AutorizacaoResources {
 
@@ -40,19 +41,23 @@ public class AutorizacaoResources {
     
     @Autowired
     private SistemaService sistemaService;
+    
+    @Autowired
+    private AcessoService acessoService;
 
-    @Path("request-token")
+    @Path("token")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response requestToken(RequestTokenDTO requestTokenDTO) {
         
         try {
-            sistemaService.verificarClienteIdValido(requestTokenDTO.getClientId());
+            sistemaService.verificarClienteSecretValido(requestTokenDTO.getClientSecret());
             usuarioService.autenticar(requestTokenDTO);
-            Token token = Token.getInstance();
-            TokenDTO tokenDTO = 
-                    new TokenDTO(token.gerarNormalToken(requestTokenDTO.getUserName(), requestTokenDTO.getGrantType(), new ArrayList<>(), requestTokenDTO.getScope()), 
-                                 token.gerarRefreshToken(requestTokenDTO.getUserName(),requestTokenDTO.getGrantType(), new ArrayList<>(), requestTokenDTO.getScope()));
+            
+            TokenDTO tokenDTO = gerarToken(requestTokenDTO);
+            
+            acessoService.salvar(tokenDTO);
+            
             return Response.ok(tokenDTO).build();
         } catch (AutenticacaoException | ClienteIdException e) {
             Logger.getLogger(AutorizacaoResources.class.getName()).log(Level.SEVERE, null, e);
@@ -65,18 +70,33 @@ public class AutorizacaoResources {
     @POST
     public Response refreshToken(TokenDTO tokenDTO) {
         try {
-            Token token = Token.getInstance();
-            return Response.ok(token.revalidarToken(tokenDTO)).build();
+            
+            return revalidarToken(tokenDTO);
+            
         } catch (ValidationException e) {
             return Response.ok().status(Response.Status.UNAUTHORIZED).build();
         }
         
     }
     
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response teste() {
-        return Response.ok("funciona").build();
+    private TokenDTO gerarToken(RequestTokenDTO requestTokenDTO) {
+        Token token = Token.getInstance();
+            return new TokenDTO(token.gerarNormalToken(requestTokenDTO.getUserName(), requestTokenDTO.getGrantType(), new ArrayList<>(), requestTokenDTO.getScope()), 
+                                 token.gerarRefreshToken(requestTokenDTO.getUserName(),requestTokenDTO.getGrantType(), new ArrayList<>(), requestTokenDTO.getScope()));
     }
-
+    
+    private Response revalidarToken(TokenDTO tokenDTO) {
+        if (acessoService.isRefreshTokenExiste(tokenDTO.getRefreshToken())) {
+                Token token = Token.getInstance();
+                
+                TokenDTO novoTokenDTO = token.revalidarToken(tokenDTO);
+                
+                acessoService.apagar(tokenDTO);
+                acessoService.salvar(novoTokenDTO);
+                
+                return Response.ok(novoTokenDTO).build();
+            } else {
+                return Response.ok().status(Response.Status.UNAUTHORIZED).build(); 
+            }
+    }
 }

@@ -24,7 +24,7 @@ public class UsuarioService {
 
     @Transactional(readOnly = true)
     public void autenticar(RequestTokenDTO requestTokenDTO) throws AutenticacaoException {
-        if (!usuarioRepository.isAtenticarUsuario(requestTokenDTO.getUserName(), requestTokenDTO.getPassword(), requestTokenDTO.getClientId())) {
+        if (!usuarioRepository.isAtenticarUsuario(requestTokenDTO.getUserName(), requestTokenDTO.getPassword(), requestTokenDTO.getClientSecret())) {
             throw new AutenticacaoException("Usuário ou senha invalidos");
         }
     }

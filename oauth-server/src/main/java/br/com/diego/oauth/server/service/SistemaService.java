@@ -20,9 +20,9 @@ public class SistemaService {
     @Autowired
     private SistemaRepository sistemaRepository;
 
-    public void verificarClienteIdValido(String clientID) throws ClienteIdException {
-        if (!sistemaRepository.isClientIdValido(clientID)) {
-            throw new ClienteIdException("Cliente Id inválido.");
+    public void verificarClienteSecretValido(String clientSecret) throws ClienteIdException {
+        if (!sistemaRepository.isClientIdValido(clientSecret)) {
+            throw new ClienteIdException("Client Secret inválido.");
         } 
     }
 

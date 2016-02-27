@@ -40,7 +40,7 @@ public class UsuarioRepository extends GenericRepository<Usuario> {
     private Boolean verificarUsuarioPermissaoAcessoSistema(List<Usuario> usuarios, String clientId) {
         Boolean isTemPermissaoAcesso = Boolean.FALSE;
 
-        Sistema sistema = sistemaRepository.buscarPorClientId(clientId);
+        Sistema sistema = sistemaRepository.buscarPorClietSecret(clientId);
 
         for (Usuario usuario : usuarios) {
             if (usuario.getSistemas().contains(sistema)) {

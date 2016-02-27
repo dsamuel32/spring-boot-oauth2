@@ -20,18 +20,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SistemaRepository extends GenericRepository<Sistema> {
     
-    public Boolean isClientIdValido(String clientId) {
-        Query query = entityManager.createQuery("SELECT s FROM Sistema s WHERE s.clientId =:clientId");
-        query.setParameter("clientId", clientId);
+    public Boolean isClientIdValido(String clientSecret) {
+        Query query = entityManager.createQuery("SELECT s FROM Sistema s WHERE s.clientSecret =:clientSecret");
+        query.setParameter("clientSecret", clientSecret);
         
         List<Sistema> sistemas = query.getResultList();
         
         return !sistemas.isEmpty();
     }
     
-    public Sistema buscarPorClientId(String clientId) {
-        Query query = entityManager.createQuery("SELECT s FROM Sistema s WHERE s.clientId =:clientId");
-        query.setParameter("clientId", clientId);
+    public Sistema buscarPorClietSecret(String clientSecret) {
+        Query query = entityManager.createQuery("SELECT s FROM Sistema s WHERE s.clientSecret =:clientSecret");
+        query.setParameter("clientSecret", clientSecret);
         
         try {
              return (Sistema) query.getSingleResult();
