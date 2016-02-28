@@ -38,6 +38,7 @@ public class GenericRepository<T> {
     }
  
     public void apagar(T entity) {
+        entity = entityManager.merge(entity);
         entityManager.remove(entity);
     }
  

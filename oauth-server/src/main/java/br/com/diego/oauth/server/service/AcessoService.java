@@ -35,6 +35,11 @@ public class AcessoService {
     }
     
     @Transactional(propagation = Propagation.REQUIRED)
+    public Acesso atualizar(TokenDTO tokenDTO) {
+        return acessoRepository.atualizar(new Acesso(tokenDTO.getToken(), tokenDTO.getRefreshToken()));
+    }
+    
+    @Transactional(propagation = Propagation.REQUIRED)
     public void apagar(Acesso acesso) {
         acessoRepository.apagar(acesso);
     }

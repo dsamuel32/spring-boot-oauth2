@@ -56,7 +56,7 @@ public class AutorizacaoResources {
             
             TokenDTO tokenDTO = gerarToken(requestTokenDTO);
             
-            acessoService.salvar(tokenDTO);
+            acessoService.atualizar(tokenDTO);
             
             return Response.ok(tokenDTO).build();
         } catch (AutenticacaoException | ClienteIdException e) {
@@ -92,7 +92,7 @@ public class AutorizacaoResources {
                 TokenDTO novoTokenDTO = token.revalidarToken(tokenDTO);
                 
                 acessoService.apagar(tokenDTO);
-                acessoService.salvar(novoTokenDTO);
+                acessoService.atualizar(novoTokenDTO);
                 
                 return Response.ok(novoTokenDTO).build();
             } else {
