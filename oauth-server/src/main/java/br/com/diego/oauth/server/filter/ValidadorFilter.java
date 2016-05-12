@@ -1,6 +1,6 @@
 package br.com.diego.oauth.server.filter;
 
-import br.com.diego.oauth.server.token.GeradorToken;
+import br.com.diego.oauth.server.exceptions.TokenException;
 import br.com.diego.oauth.server.token.Token;
 import java.io.IOException;
 
@@ -16,8 +16,14 @@ import org.springframework.web.filter.GenericFilterBean;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ValidadorFilter extends GenericFilterBean {
+    
+    @Autowired
+    private Token token;
 
     @Override
     public void doFilter(final ServletRequest req,
@@ -26,8 +32,8 @@ public class ValidadorFilter extends GenericFilterBean {
         final HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        final String authHeader = request.getHeader(GeradorToken.AUTHORIZATION);
-        if (authHeader == null || !authHeader.startsWith(GeradorToken.BEARER)) {
+        final String authHeader = request.getHeader(Token.AUTHORIZATION);
+        if (authHeader == null || !authHeader.startsWith(Token.BEARER)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
@@ -35,16 +41,15 @@ public class ValidadorFilter extends GenericFilterBean {
         final String tokenHeader = authHeader.substring(7); // The part after "Bearer "
 
         try {
-            Token token = Token.getInstance();
-            final Claims claims = token.verificarTokenValido(tokenHeader);
-            request.setAttribute(GeradorToken.CLAIMS, claims);
-        } catch (SignatureException e) {
+            final Claims claims = token.verificarNormalTokenValido(tokenHeader);
+            request.setAttribute(Token.CLAIMS, claims);
+        } catch (SignatureException | TokenException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            throw new ServletException("Invalid token.");
+            throw new ServletException(e.getMessage());
         } catch (ExpiredJwtException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
-        }
+        } 
 
         chain.doFilter(req, res);
     }

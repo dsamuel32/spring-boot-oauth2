@@ -28,5 +28,4 @@ public class UsuarioService {
             throw new AutenticacaoException("Usuário ou senha invalidos");
         }
     }
-
 }

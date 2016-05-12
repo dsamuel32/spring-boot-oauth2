@@ -1,6 +1,7 @@
 package br.com.diego.oauth.server.config;
 
 import br.com.diego.oauth.server.filter.ValidadorFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
@@ -20,6 +21,18 @@ public class MainApplication {
     
     **/
     
+    /*
+    {
+        "access_token":"2YotnFZFEjr1zCsicMWpAA",
+        "token_type":“bearer",
+        "expires_in":3600,
+        "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA",
+    }
+    */
+    
+    @Autowired
+    private ValidadorFilter filter;
+    
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
     }
@@ -27,7 +40,8 @@ public class MainApplication {
     @Bean 
     public FilterRegistrationBean jwtFilter() {
         final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(new ValidadorFilter());
+//        registrationBean.setFilter(new ValidadorFilter());
+        registrationBean.setFilter(filter);
         registrationBean.addUrlPatterns("/api/privado/*");
 
         return registrationBean;
