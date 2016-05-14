@@ -14,3 +14,5 @@ C:\Users\Diego NOTE\Documents\NetBeansProjects\servidor-autenticacao-oauth2\oaut
 nbactions.xml
 
 /oauth-server/target/
+/oauth-server-view/bower_components/
+/oauth-server-view/node_modules/
