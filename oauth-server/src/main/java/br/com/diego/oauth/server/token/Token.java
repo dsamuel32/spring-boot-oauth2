@@ -69,6 +69,10 @@ public class Token {
         Claims c = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
+    
+    public Claims verificarRefreshTokenExpirou(String token) {
+        return verificarTokenValido(token);
+    }
 
     public TokenDTO revalidarToken(TokenDTO tokenDTO) {
         try {

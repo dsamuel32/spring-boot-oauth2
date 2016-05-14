@@ -8,6 +8,7 @@ package br.com.diego.oauth.server.service;
 import br.com.diego.oauth.server.dtos.TokenDTO;
 import br.com.diego.oauth.server.entidades.Acesso;
 import br.com.diego.oauth.server.repository.AcessoRepository;
+import java.util.List;
 import javax.persistence.NoResultException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,10 @@ public class AcessoService {
     public void apagar(TokenDTO tokenDTO) {
         Acesso acesso = acessoRepository.buscarPorRefreshToken(tokenDTO.getRefreshToken());
         apagar(acesso);
+    }
+    
+    public List<Acesso> findAll() {
+        return acessoRepository.buscarTodos();
     }
 
     public Boolean isRefreshTokenExiste(String refreshToken) {
