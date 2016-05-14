@@ -5,6 +5,7 @@
  */
 package br.com.diego.oauth.server.resources;
 
+import br.com.diego.oauth.server.dtos.ErroDTO;
 import br.com.diego.oauth.server.dtos.RequestTokenDTO;
 import br.com.diego.oauth.server.dtos.TokenDTO;
 import br.com.diego.oauth.server.service.UsuarioService;
@@ -64,7 +65,7 @@ public class AutorizacaoResources {
             return Response.ok(tokenDTO).build();
         } catch (AutenticacaoException | ClienteIdException e) {
             Logger.getLogger(AutorizacaoResources.class.getName()).log(Level.SEVERE, null, e);
-            return Response.ok().status(Response.Status.UNAUTHORIZED).build();
+            return Response.ok(new ErroDTO(e.getMessage())).status(Response.Status.UNAUTHORIZED).build();
         }
 
     }
@@ -75,7 +76,7 @@ public class AutorizacaoResources {
         try {
             return revalidarToken(tokenDTO);
         } catch (ValidationException | TokenException e) {
-            return Response.ok(e.getMessage()).status(Response.Status.UNAUTHORIZED).build();
+            return Response.ok(new ErroDTO(e.getMessage())).status(Response.Status.UNAUTHORIZED).build();
         }
     }
 
