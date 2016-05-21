@@ -1,0 +1,22 @@
+<da-loader hooks="['LoaderUiRouterController']"></da-loader>
+<div class="row">
+
+</div>
+<div class="row text-right">
+    <div class="col-xs-12 col-sm-12" ng-if="usuarioLogado">
+        <div class="pull-right">
+            &nbsp;| <a href="javascript:void(0);" ng-click="performLogout()">SAIR</a>
+        </div>
+        <div class="pull-right nomeUsuario">
+            {{usuarioLogado.nome}}
+        </div>
+    </div>
+</div>
+
+<div class="row row-offcanvas row-offcanvas-left">
+    <ui-view/>
+</div>
+
+<div class="row">
+    Versão : ${version}
+</div>

@@ -21,6 +21,7 @@ public class MainApplication {
     http://localhost:8080/oauth-server/api/oauth/token  {"userName" : "teste@teste.com", "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "clientId": "Web", "clientSecret": "646514d85279c63c7aacbc7a91e7575bd2d1adcb0086c45840242b090c69cc08", "grantType": "password", "scope" :"API"}
     http://localhost:8080/oauth-server/api/oauth/refresh-token
     
+    * mvn flyway:migrate -Dflyway.url=... -Dflyway.user=... -Dflyway.password=...
     **/
     
     /*
