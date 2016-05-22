@@ -1,21 +1,22 @@
 "use strict";
-angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config']).config(['$ocLazyLoadProvider', '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 'CONFIG_APP',
+angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config', 'app.home'])
+.config(['$ocLazyLoadProvider', '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 'CONFIG_APP',
   function($ocLazyLoadProvider, $stateProvider, $urlRouterProvider, RestangularProvider, CONFIG_APP) {
     $ocLazyLoadProvider.config({
         //debug: true,
         //events: true
     });
 
-    //$urlRouterProvider.otherwise('/public/login');
+    $urlRouterProvider.otherwise('/home');
 
     $stateProvider.state('app', {
         url: '',
         abstract: true,
         templateUrl: 'template.html',
-        controller: 'AppController',
+        controller: 'appController',
         controllerAs:'appCtrl',
         resolve: {
-            root: [ '$ocLazyLoad', function($ocLazyLoad){
+            root: ['$ocLazyLoad', function($ocLazyLoad){
                 return $ocLazyLoad.load({
                     name: 'app',
                     files: []// controller and directives
@@ -50,7 +51,9 @@ angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config']).con
                 $translatePartialLoader.addPart('services/mensagem/language');
                 return $translate.refresh();
             }],*/
-          ]
+            loader: ['$ocLazyLoad', function($ocLazyLoad){
+                return $ocLazyLoad.load('modulos');
+            }]
         }
       });
 

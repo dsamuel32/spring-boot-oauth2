@@ -1,5 +1,5 @@
 "use strict";
-angular.module('app').controller('AppController', ['$rootScope', '$scope',
+angular.module('app').controller('appController', ['$rootScope', '$scope',
 function($rootScope, $scope){
     var self = this;
 }]);
