@@ -12,35 +12,81 @@
       <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
       <meta http-equiv="pragma" content="no-cache" />
       <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
-
-      <script src="../../bower_components/angular/angular.min.js"></script>
-      <script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-      <script src="../../bower_components/angular-resource/angular-resource.min.js"></script>
-      <script src="../../bower_components/angular-jwt/dist/angular-jwt.js"></script>
-      <script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-      <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.core.js"></script>
-      <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.statevis.js"></script>
-      <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.previous.js"></script>
-      <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.transition.js"></script>
-      <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.sticky.js"></script>
-      <script src="../../bower_components/oclazyload/dist/oclazyload.min.js"></script>
-      <script src="../../bower_components/lodash/lodash.js"></script>
-      <script src="../../bower_components/restangular/dist/restangular.min.js"></script>
-      <script src="config/config.js"></script>
-      <script src="app.js"></script>
-
-      <script src="http://localhost:35729/livereload.js"></script>
+      <link rel="stylesheet" href="css/geral.css">
 
     </head>
     <body>
-        <h2 class="text-center">teste</h2>
-        {{1 + 1}}
-        <!-- div id="appRoot" class="container" ui-view>
-        </div -->
+      <header>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <!-- li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li -->
+                <li><a href="#"><span class="glyphicon glyphicon-align-justify"></span> Home</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastro <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Perfil</a></li>
+                    <li><a href="#">Usuário</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Sistemas</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-user"></span>
+                    Diego
+                    <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Editar</a></li>
+                    <li><a href="#">Sair</a></li>
+                  </ul>
+                </li>
+              </ul>
+
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+      </header>
+
+        <div id="appRoot" class="container" ui-view>
+        </div>
+
+        <footer class="navbar-default">
+
+          <div>
+
+          </div>
+
+
+        </footer>
         <!-- bower:js -->
 
+          <script src="../../bower_components/angular/angular.min.js"></script>
+          <script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+          <script src="../../bower_components/angular-resource/angular-resource.min.js"></script>
+          <script src="../../bower_components/angular-jwt/dist/angular-jwt.js"></script>
+          <script src="../../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+          <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.core.js"></script>
+          <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.statevis.js"></script>
+          <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.previous.js"></script>
+          <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.transition.js"></script>
+          <script src="../../bower_components/ui-router-extras/release/modular/ct-ui-router-extras.sticky.js"></script>
+          <script src="../../bower_components/oclazyload/dist/oclazyload.min.js"></script>
+          <script src="../../bower_components/lodash/lodash.js"></script>
+          <script src="../../bower_components/restangular/dist/restangular.min.js"></script>
+          <script src="config/config.js"></script>
+          <script src="app.js"></script>
 
+          <script src="http://localhost:35729/livereload.js"></script>
 
         <!-- endbower -->
 

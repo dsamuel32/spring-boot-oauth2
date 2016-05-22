@@ -6,7 +6,7 @@ angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config']).con
         //events: true
     });
 
-    $urlRouterProvider.otherwise('/public/login');
+    //$urlRouterProvider.otherwise('/public/login');
 
     $stateProvider.state('app', {
         url: '',
@@ -50,9 +50,7 @@ angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config']).con
                 $translatePartialLoader.addPart('services/mensagem/language');
                 return $translate.refresh();
             }],*/
-            loader: ['$ocLazyLoad', function($ocLazyLoad){
-                return $ocLazyLoad.load('da-loader');
-            }]
+          ]
         }
       });
 
