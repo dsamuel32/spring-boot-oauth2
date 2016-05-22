@@ -1,6 +1,6 @@
 "use strict";
-angular.module('app', []).config(['$ocLazyLoadProvider', '$stateProvider', '$urlRouterProvider', '$animateProvider', 'RestangularProvider', 'CONFIG_APP',
-  function($ocLazyLoadProvider, $stateProvider, $urlRouterProvider, $animateProvider, RestangularProvider, CONFIG_APP) {
+angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config']).config(['$ocLazyLoadProvider', '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 'CONFIG_APP',
+  function($ocLazyLoadProvider, $stateProvider, $urlRouterProvider, RestangularProvider, CONFIG_APP) {
     $ocLazyLoadProvider.config({
         //debug: true,
         //events: true

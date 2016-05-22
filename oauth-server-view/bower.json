@@ -19,6 +19,10 @@
     "bootstrap": "^3.3.6",
     "angular": "^1.5.5",
     "angular-jwt": "^0.0.9",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "~0.2.13",
+    "oclazyload": "~1.0.6",
+    "restangular": "^1.5.2",
+    "angular-resource": "^1.5.5",
+    "ui-router-extras": "0.0.14"
   }
 }
