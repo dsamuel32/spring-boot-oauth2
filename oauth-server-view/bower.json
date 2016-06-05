@@ -2,6 +2,8 @@
   "name": "oauth-server-view",
   "description": "",
   "main": "index.html",
+  "appPath": "src/main/resources/static",
+  "testPath": "src/test/javascript/spec",
   "authors": [
     "dsamuel32 <diego.samuel.alves@gmail.com>"
   ],
