@@ -9,8 +9,10 @@ angular.module('$config', [
 .config(['$translateProvider', '$translatePartialLoaderProvider','$httpProvider', '$rootScopeProvider',
 				function($translateProvider, $translatePartialLoaderProvider, $httpProvider, $rootScopeProvider) {
 
+					$translatePartialLoaderProvider.addPart('language');
+
 					$translateProvider.useLoader('$translatePartialLoader', {
-						urlTemplate: '/{part}-{lang}.json'
+						urlTemplate: '{part}/{lang}.json'
 					});
 
 					if (!$httpProvider.defaults.headers.get) {
@@ -32,3 +34,5 @@ angular.module('$config', [
 	contexto:'/oauth-server',
 	apiEndpoint:'/oauth-server/api/'
 });
+
+//http://plnkr.co/edit/MankhnyAG31U665481YX?p=preview

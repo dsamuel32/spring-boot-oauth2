@@ -10,12 +10,12 @@ angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config','pasc
 
     /*$translateProvider.translations('pt-BR', {
     "home":"HOME"
-  });*/
+  });
 
     $translateProvider.preferredLanguage('pt-BR');
     $translateProvider.useSanitizeValueStrategy('escapeParameters');
 
-
+    */
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider.state('app', {
@@ -56,10 +56,10 @@ angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config','pasc
                     files: []//SERVICES
                 });
             }],
-          translate:['$translate', '$translatePartialLoader', function($translate, $translatePartialLoader) {
+          /*translate:['$translate', '$translatePartialLoader', function($translate, $translatePartialLoader) {
                 $translatePartialLoader.addPart('language');
                 return $translate.refresh();
-            }],
+            }],*/
             loader: ['$ocLazyLoad', function($ocLazyLoad){
                 return $ocLazyLoad.load('modules');
             }]
