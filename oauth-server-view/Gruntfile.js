@@ -7,7 +7,7 @@ module.exports = function(grunt){
             files:['**/*'],
             //files:['app/**','server/**'],
             tasks:[]
-            
+
         },
         express:{
             all:{
@@ -17,16 +17,16 @@ module.exports = function(grunt){
                     port:3000,
                     bases:['./oauth-server-view'],
                     livereload:true
-                    
+
                 }
             }
-        }        
+        }
 //        open: {
 //            all: {
 //                path: 'http://localhost:3000/public/app/index.html'
 //            }
 //        }
-        
+
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -34,4 +34,3 @@ module.exports = function(grunt){
     grunt.registerTask('server',['express','watch']);
 
 };
-

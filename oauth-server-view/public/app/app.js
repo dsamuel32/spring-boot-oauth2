@@ -1,11 +1,20 @@
 "use strict";
-angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config', 'app.home'])
-.config(['$ocLazyLoadProvider', '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 'CONFIG_APP',
-  function($ocLazyLoadProvider, $stateProvider, $urlRouterProvider, RestangularProvider, CONFIG_APP) {
+angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config','pascalprecht.translate', 'app.home'])
+.config(['$ocLazyLoadProvider', '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 'CONFIG_APP', '$translateProvider',
+  function($ocLazyLoadProvider, $stateProvider, $urlRouterProvider, RestangularProvider, CONFIG_APP, $translateProvider) {
     $ocLazyLoadProvider.config({
         //debug: true,
         //events: true
     });
+
+
+    /*$translateProvider.translations('pt-BR', {
+    "home":"HOME"
+  });*/
+
+    $translateProvider.preferredLanguage('pt-BR');
+    $translateProvider.useSanitizeValueStrategy('escapeParameters');
+
 
     $urlRouterProvider.otherwise('/home');
 
@@ -47,12 +56,12 @@ angular.module('app', ['oc.lazyLoad','ui.router', 'restangular', '$config', 'app
                     files: []//SERVICES
                 });
             }],
-          /*  tranlate:['$translate', '$translatePartialLoader', function($translate, $translatePartialLoader) {
-                $translatePartialLoader.addPart('services/mensagem/language');
+          translate:['$translate', '$translatePartialLoader', function($translate, $translatePartialLoader) {
+                $translatePartialLoader.addPart('language');
                 return $translate.refresh();
-            }],*/
+            }],
             loader: ['$ocLazyLoad', function($ocLazyLoad){
-                return $ocLazyLoad.load('modulos');
+                return $ocLazyLoad.load('modules');
             }]
         }
       });

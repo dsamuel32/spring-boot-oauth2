@@ -2,21 +2,30 @@
 
 angular.module('$config', [
 	'oc.lazyLoad',
-	'ui.router'
+	'ui.router',
+	'pascalprecht.translate'
 ])
 
-.config(['$httpProvider', '$rootScopeProvider', function($httpProvider, $rootScopeProvider){
+.config(['$translateProvider', '$translatePartialLoaderProvider','$httpProvider', '$rootScopeProvider',
+				function($translateProvider, $translatePartialLoaderProvider, $httpProvider, $rootScopeProvider) {
 
-	if (!$httpProvider.defaults.headers.get) {
-		$httpProvider.defaults.headers.get = {};
-	}
-	$httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
-	$httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
-	$httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+					$translateProvider.useLoader('$translatePartialLoader', {
+						urlTemplate: '/{part}-{lang}.json'
+					});
 
-//	$httpProvider.interceptors.push('JwtHttpInterceptor');
+					if (!$httpProvider.defaults.headers.get) {
+						$httpProvider.defaults.headers.get = {};
+					}
+					$httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+					$httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+					$httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
 
-	$rootScopeProvider.digestTtl(60);
+				//	$httpProvider.interceptors.push('JwtHttpInterceptor');
+
+					$rootScopeProvider.digestTtl(60);
+
+					$translateProvider.preferredLanguage('pt-BR');
+					$translateProvider.useSanitizeValueStrategy('escapeParameters');
 
 }])
 .constant('CONFIG_APP', {

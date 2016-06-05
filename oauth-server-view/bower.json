@@ -23,6 +23,9 @@
     "oclazyload": "~1.0.6",
     "restangular": "^1.5.2",
     "angular-resource": "^1.5.5",
-    "ui-router-extras": "0.0.14"
+    "ui-router-extras": "0.0.14",
+    "angular-translate": "^2.11.0",
+    "angular-translate-loader-partial": "^2.11.0",
+    "angular-translate-loader-url": "^2.11.0"
   }
 }
