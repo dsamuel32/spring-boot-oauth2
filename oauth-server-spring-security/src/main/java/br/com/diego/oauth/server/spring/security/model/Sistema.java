@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.diego.oauth.server.entidades;
+package br.com.diego.oauth.server.spring.security.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -22,39 +19,27 @@ import javax.persistence.Table;
  * @author Diego NOTE
  */
 @Entity
-@Table(name = "ROLE")
-public class Role implements Serializable {
-
+@Table(name = "SISTEMA")
+public class Sistema implements Serializable {
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-
-    @Column(name = "SIGLA")
-    private String sigla;
-
+    
     @Column(name = "NOME")
     private String nome;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-    private Set<Usuario> usuarios;
-
-    public Role() {
-        usuarios = new HashSet<Usuario>();
-    }
+    
+    @Lob
+    @Column(name = "CLIENT_SECRET")    
+    private String clientSecret;
 
     public Long getId() {
         return id;
     }
 
-    public String getSigla() {
-        return sigla;
-    }
-
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -65,28 +50,21 @@ public class Role implements Serializable {
         this.nome = nome;
     }
 
-    public Set<Usuario> getUsuarios() {
-        return usuarios;
+    public String getClientSecret() {
+        return clientSecret;
     }
 
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Role)) {
+        if (!(object instanceof Sistema)) {
             return false;
         }
-        Role other = (Role) object;
+        Sistema other = (Sistema) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -95,7 +73,7 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.diego.oauth.server.entidades.Role[ id=" + id + " ]";
+        return "br.com.diego.oauth.server.entidades.Sistemas[ id=" + id + " ]";
     }
- 
+    
 }

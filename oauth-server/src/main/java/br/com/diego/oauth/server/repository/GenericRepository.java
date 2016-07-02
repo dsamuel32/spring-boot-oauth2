@@ -20,33 +20,33 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional(readOnly = true)
 public class GenericRepository<T> {
-    
+
     @PersistenceContext
     protected EntityManager entityManager;
-    
+
     public T buscarPorCodigo(Long codigo) {
         return (T) entityManager.find(getTypeClass(), codigo);
     }
- 
+
     public T atualizar(T entity) {
         return entityManager.merge(entity);
     }
-    
+
     public T salvar(T entity) {
         entityManager.persist(entity);
         return entity;
     }
- 
+
     public void apagar(T entity) {
         entity = entityManager.merge(entity);
         entityManager.remove(entity);
     }
- 
+
     public List<T> buscarTodos() {
         return entityManager.createQuery(("SELECT c FROM " + getTypeClass().getName() + " c "))
                 .getResultList();
     }
- 
+
     private Class<?> getTypeClass() {
         Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.diego.oauth.server.entidades;
+package br.com.diego.oauth.server.spring.security.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
 
 /**
  *
@@ -23,7 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ROLE")
-public class Role implements Serializable {
+public class Role implements Serializable, GrantedAuthority {
 
     private static final long serialVersionUID = 1L;
 
@@ -97,5 +98,10 @@ public class Role implements Serializable {
     public String toString() {
         return "br.com.diego.oauth.server.entidades.Role[ id=" + id + " ]";
     }
- 
+
+    @Override
+    public String getAuthority() {
+        return nome;
+    }
+
 }

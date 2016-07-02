@@ -21,7 +21,7 @@ public class UsuarioRepository extends GenericRepository<Usuario> {
 
     @Autowired
     private SistemaRepository sistemaRepository;
-
+    
     public Boolean isAtenticarUsuario(String userName, String password, String clientId) {
         Query query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.userName =:userName AND u.password =:password");
         query.setParameter("userName", userName);

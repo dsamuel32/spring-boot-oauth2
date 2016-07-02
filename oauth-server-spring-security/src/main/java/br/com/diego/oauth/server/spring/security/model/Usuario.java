@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.diego.oauth.server.entidades;
+package br.com.diego.oauth.server.spring.security.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -59,6 +59,15 @@ public class Usuario implements Serializable {
     public Usuario() {
         roles = new HashSet<>();
         sistemas = new HashSet<>();
+    }
+
+    public Usuario(Usuario usuario) {
+        super();
+        this.id = usuario.getId();
+        this.nome = usuario.getNome();
+        this.userName = usuario.getUserName();
+        this.password = usuario.getPassword();
+        this.roles = usuario.getRoles();
     }
 
     public Long getId() {
