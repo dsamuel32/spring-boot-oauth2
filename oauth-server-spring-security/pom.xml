@@ -103,7 +103,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>3.2.1</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/controleacesso?createDatabaseIfNotExist=true</url>
+                    <url>jdbc:mysql://localhost:3306/oauth</url>
                     <user>root</user>
                     <password>root</password>
                     <baselineOnMigrate>true</baselineOnMigrate>

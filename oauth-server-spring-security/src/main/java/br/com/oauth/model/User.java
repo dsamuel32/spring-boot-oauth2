@@ -17,27 +17,32 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "USER")
 public class User implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "ID")
 	private Integer id;
 
 	@NotEmpty
+        @Column(name = "NAME")
 	private String name;
 
 	@NotEmpty
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, name = "LOGIN")
 	private String login;
 
 	@NotEmpty
+        @Column(name = "PASSWORD")
 	private String password;
 
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	private Set<Role> roles = new HashSet<Role>();
 
 	public User() {

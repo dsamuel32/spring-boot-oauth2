@@ -39,7 +39,8 @@ public class OAuth2ServerConfiguration {
 			http
 				.authorizeRequests()
 					.antMatchers("/users").hasRole("ADMIN")
-					.antMatchers("/home").authenticated();
+					.antMatchers("/home").authenticated()
+                                        .antMatchers("/publico").anonymous();
 		}
 
 	}

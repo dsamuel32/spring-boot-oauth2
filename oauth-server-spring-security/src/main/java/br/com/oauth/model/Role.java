@@ -14,17 +14,23 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.Column;
+import javax.persistence.Table;
 
 @Entity
+
+@Table(name = "ROLE")
 public class Role implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "ID")
 	private Integer id;
 
 	@NotEmpty
+        @Column(name = "NAME")
 	private String name;
 
 	@JsonIgnore
