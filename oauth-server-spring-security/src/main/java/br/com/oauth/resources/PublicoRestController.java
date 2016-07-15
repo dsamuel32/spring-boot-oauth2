@@ -20,14 +20,28 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Diego NOTE
  */
 @RestController
-@RequestMapping(value = "home", produces = MediaType.APPLICATION_JSON_VALUE)
-public class HomeRestController {
+@RequestMapping(value = "publico", produces = MediaType.APPLICATION_JSON_VALUE)
+public class PublicoRestController {
     
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resposta<String>> getHome() {
         Resposta<String> resposta = RespostaBuilder.getBuilder()
-                .setResultado("Está é a home e você esta logado").build();
+                .setErros(Arrays.asList("Erro 1", "Erro 2"))
+                .setMensagens(Arrays.asList("Mensagem 1", "Mensagem 2"))
+                .setResultado("Você não precisa estar logado").build();
         return new ResponseEntity<>(resposta, HttpStatus.OK);
+    }
+    
+    class Teste {
+        private String resposta;
+        
+        public String getResposta() {
+            return this.resposta;
+        }
+        
+        public void setResposta(String resposta) {
+            this.resposta = resposta;
+        }
     }
     
 }

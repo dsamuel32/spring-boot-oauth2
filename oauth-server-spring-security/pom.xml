@@ -90,10 +90,10 @@
             <artifactId>json-path-assert</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jersey</artifactId>
-        </dependency>-->
+        </dependency>
     </dependencies>
 
     <build>

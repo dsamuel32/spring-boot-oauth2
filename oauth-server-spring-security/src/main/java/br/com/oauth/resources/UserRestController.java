@@ -1,5 +1,7 @@
 package br.com.oauth.resources;
 
+import br.com.oauth.builder.Resposta;
+import br.com.oauth.builder.RespostaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +22,10 @@ public class UserRestController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> getUsers() {
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    public ResponseEntity<Resposta<User>> getUsers() {
+        Resposta<User> resposta = RespostaBuilder.getBuilder()
+                .setResultado(userService.findAll()).build();
+        return new ResponseEntity<>(resposta, HttpStatus.OK);
     }
 
 }

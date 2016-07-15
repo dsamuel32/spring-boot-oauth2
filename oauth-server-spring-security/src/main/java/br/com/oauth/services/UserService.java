@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Diego NOTE
  */
 @Service
-@Transactional(propagation = Propagation.NEVER)
+@Transactional(propagation = Propagation.REQUIRED)
 public class UserService {
     
     @Autowired
