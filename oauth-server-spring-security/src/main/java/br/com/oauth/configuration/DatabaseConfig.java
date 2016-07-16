@@ -42,7 +42,7 @@ public class DatabaseConfig {
 		Properties additionalProperties = new Properties();
 		additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		additionalProperties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-		additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+//		additionalProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		entityManagerFactoryBean.setJpaProperties(additionalProperties);
 
 		return entityManagerFactoryBean;

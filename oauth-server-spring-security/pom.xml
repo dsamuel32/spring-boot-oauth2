@@ -29,7 +29,7 @@
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
         </dependency>
-        <!--        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>-->
@@ -103,9 +103,13 @@
                     <baselineOnMigrate>true</baselineOnMigrate>
                 </configuration>             
             </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
-
+  
     <repositories>
         <repository>
             <id>spring-releases</id>

@@ -37,9 +37,9 @@ public class Application {
                 "Swagger com Spring Boot",
                 "Simples demostração Swagger e Spring Boot",
                 "Uso livre",
-                "contato",
-                "Licença",
-                "contato"
+                "diego.samuel.alves@gmail.com",
+                "Licença pública",
+                "diego.samuel.alves@gmail.com"
         );
         return apiInfo;
     }

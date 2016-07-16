@@ -19,7 +19,9 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 import br.com.oauth.configuration.userdetails.CustomUserDetailsService;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
+@EnableWebSecurity
 @Configuration
 public class OAuth2ServerConfiguration {
 
@@ -36,11 +38,23 @@ public class OAuth2ServerConfiguration {
 
 		@Override
 		public void configure(HttpSecurity http) throws Exception {
-			http
-				.authorizeRequests()
-					.antMatchers("/users").hasRole("ADMIN")
-					.antMatchers("/home").authenticated()
-                                        .antMatchers("/publico").anonymous();
+//                    http://stackoverflow.com/questions/28311423/enabling-spring-security-makes-swagger-output-text-plain-instead-of-html
+                    //http://docs.spring.io/spring-security/site/docs/3.2.0.CI-SNAPSHOT/reference/html/headers.html#headers-content-type-options
+			http                            
+                            .authorizeRequests()
+                                    .antMatchers("/users").hasRole("ADMIN")
+                                    .antMatchers("/home").authenticated()
+                                    .antMatchers("/publico").anonymous();
+//                        http
+//                                .headers()
+//                                .contentTypeOptions();
+//                        http
+//                                .csrf()
+//                                .disable();
+
+                        http.headers().contentTypeOptions().disable();
+                        
+//                        http.headers().disable();
 		}
 
 	}
