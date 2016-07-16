@@ -32,8 +32,8 @@ public class PublicoRestController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Resposta<String>> getHome() {
         Resposta<String> resposta = RespostaBuilder.getBuilder()
-                .setErros(Arrays.asList("Erro 1", "Erro 2"))
-                .setMensagens(Arrays.asList("Mensagem 1", "Mensagem 2"))
+//                .setErros(Arrays.asList("Erro 1", "Erro 2"))
+//                .setMensagens(Arrays.asList("Mensagem 1", "Mensagem 2"))
                 .setResultado("Você não precisa estar logado").build();
         return new ResponseEntity<>(resposta, HttpStatus.OK);
     }
