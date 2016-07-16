@@ -17,7 +17,7 @@ Exemplo de aplicação REST com autenticação OAUTH2.
 
 - E executar o comando 
 ```sh
-mvn flyway:migration
+mvn flyway:migrate
 ```
 - Contruir o projeto
 ```sh
