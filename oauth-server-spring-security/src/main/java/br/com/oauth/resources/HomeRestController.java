@@ -7,7 +7,6 @@ package br.com.oauth.resources;
 
 import br.com.oauth.builder.Resposta;
 import br.com.oauth.builder.RespostaBuilder;
-import java.util.Arrays;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

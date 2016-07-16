@@ -32,23 +32,23 @@ public class RespostaBuilder <T> {
         return this;
     }
     
-    public RespostaBuilder<T> setMensagens(String mensagem) {
-        resposta.setMensagens(mensagem);
+    public RespostaBuilder<T> setMensagen(String mensagem) {
+        resposta.getMensagens().add(mensagem);
         return this;
     }
     
     public RespostaBuilder<T> setMensagens(List<String> mensagens) {
-        resposta.setMensagens(mensagens);
+        resposta.getMensagens().addAll(mensagens);
         return this;
     }
     
-    public RespostaBuilder<T> setErros(String erro) {
-        resposta.setMensagens(erro);
+    public RespostaBuilder<T> setErro(String erro) {        
+        resposta.getMensagens().add(erro);
         return this;
     }
     
-    public RespostaBuilder<T> setErros(List<String> erros) {
-        resposta.setErros(erros);
+    public RespostaBuilder<T> setErros(List<String> erros) {       
+        resposta.getErros().addAll(erros);
         return this;
     }
 }

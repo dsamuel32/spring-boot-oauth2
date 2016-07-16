@@ -38,10 +38,6 @@ public class Resposta <T> {
         return erros;
     }
 
-    public void setErro(String erro) {
-        this.erros.add(erro);
-    }
-    
     public void setErros(List<String> erros) {
         this.erros = erros;
     }
@@ -50,10 +46,6 @@ public class Resposta <T> {
         return mensagens;
     }
 
-    public void setMensagens(String mensagem) {
-        this.mensagens.add(mensagem);
-    }
-    
     public void setMensagens(List<String> mensagens) {
         this.mensagens = mensagens;
     }
