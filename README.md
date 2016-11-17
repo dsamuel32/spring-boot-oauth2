@@ -1,4 +1,4 @@
-### servidor-autenticacao-
+### Servidor de Autenticacao Oauth2 - Spring Boot/Spring Security
 Exemplo de aplicação REST com autenticação OAUTH2.
 
 - Tecnologias Utilizadas
