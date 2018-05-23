@@ -1,4 +1,4 @@
-### Servidor de Autenticacao Oauth2 - Spring Boot/Spring Security
+### Spring-Boot-Oauth2 - Spring Boot/Spring Security
 Exemplo de aplicação REST com autenticação OAUTH2.
 
 - Tecnologias Utilizadas
@@ -7,7 +7,7 @@ Exemplo de aplicação REST com autenticação OAUTH2.
 - Spring Security OAuth
 - Spring MVC
 - Spring Data JPA
-- Flyway
+- Liquibase
 - Swagger
 - Mysql
 
@@ -16,11 +16,7 @@ Exemplo de aplicação REST com autenticação OAUTH2.
 - Criar um schema chamado autenticacao;
 
 - E executar o comando 
-```sh
-mvn flyway:migrate
-```
-- Contruir o projeto
-```sh
+
 mv clean install spring-boot:run
 ```
 ###Usando o projeto
