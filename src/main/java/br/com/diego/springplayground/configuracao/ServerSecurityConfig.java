@@ -13,7 +13,7 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("john").password("123").roles("USER");
+                .withUser("teste").password("123").roles("USER");
     }
 
     @Override
@@ -27,6 +27,7 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/public").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll();

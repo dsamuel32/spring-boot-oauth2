@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
+public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     @Qualifier("authenticationManagerBean")
@@ -99,9 +99,12 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
     public RemoteTokenServices tokenService() {
         RemoteTokenServices tokenService = new RemoteTokenServices();
         tokenService.setCheckTokenEndpointUrl(
-                "http://localhost:8080/spring-security-oauth-server/oauth/check_token");
+                "http://localhost:8080/autenticacao/oauth/check_token");
         tokenService.setClientId("fooClientIdPassword");
         tokenService.setClientSecret("secret");
         return tokenService;
     }
 }
+
+//curl -X POST -vu clientIdPassword:secret http://localhost:8080/autenticacao/oauth/token -H "Accept: application/json" -d "password=123&username=teste&grant_type=password&scope=read&client_secret=secret&client_id=clientIdPassWord"
+//https://github.com/Baeldung/spring-security-oauth/tree/master/spring-security-oauth-server/src/main/java/org/baeldung/config

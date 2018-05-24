@@ -25,7 +25,7 @@ spring:
         user: ${spring.datasource.username}
         password: ${spring.datasource.password}
 
-#security:
-#      oauth2:
-#            resource:
-#                filter-order: 3
+security:
+      oauth2:
+            resource:
+                filter-order: 3

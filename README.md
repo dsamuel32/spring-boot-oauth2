@@ -1,4 +1,4 @@
-### Spring-Boot-Oauth2 - Spring Boot/Spring Security
+### Spring-Boot-Oauth2 - Spring Boot/Spring Security (DOCUMENTAÇÃO DESATUALIZADA)
 Exemplo de aplicação REST com autenticação OAUTH2.
 
 - Tecnologias Utilizadas
