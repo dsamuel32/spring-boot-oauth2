@@ -22,7 +22,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-            .antMatchers("/users").hasRole("ADMIN")
+            .antMatchers("/usuario").hasRole("ADMIN")
             .antMatchers("/home").authenticated()
             .antMatchers("/publico").anonymous();
         http.headers().contentTypeOptions().disable();

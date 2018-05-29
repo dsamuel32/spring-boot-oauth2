@@ -30,10 +30,6 @@ import java.util.Arrays;
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    private static final String RESOURCE_ID = "restservice";
-
-    private TokenStore tokenStore = new InMemoryTokenStore();
-
     @Autowired
     private UsuarioService usuarioService;
 
@@ -43,15 +39,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     private DataSource dataSource;
-
-    @Value("${spring.datasource.url}")
-    private String url;
-    @Value("${spring.datasource.password}")
-    private String senha;
-    @Value("${spring.datasource.driver-class-name}")
-    private String driver;
-    @Value("${spring.datasource.username}")
-    private String usuario;
 
     @Override
     public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
@@ -64,15 +51,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         clients.jdbc(dataSource);
     }
 
-   /* @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints)
-            throws Exception {
-        endpoints
-                .tokenStore(this.tokenStore)
-                .authenticationManager(this.authenticationManager)
-                .userDetailsService(usuarioService);
-    }*/
-
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
@@ -82,27 +60,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .authenticationManager(authenticationManager)
                 .userDetailsService(usuarioService);
     }
-
-  /*  @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
-                .inMemory()
-                .withClient("clientapp")
-                .authorizedGrantTypes("password", "refresh_token")
-                .authorities("ADMIN")
-                .scopes("read", "write")
-                .resourceIds(RESOURCE_ID)
-                .secret("123456");
-    }*/
-
-    /*@Bean
-    @Primary
-    public DefaultTokenServices tokenServices() {
-        DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setSupportRefreshToken(true);
-        tokenServices.setTokenStore(this.tokenStore);
-        return tokenServices;
-    }*/
 
     @Bean
     @Primary
@@ -117,17 +74,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public TokenEnhancer tokenEnhancer() {
         return new CustomTokenEnhancer();
     }
-
-  /*  @Bean
-    public DataSource dataSource() {
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driver);
-        dataSource.setUrl(url);
-        dataSource.setUsername(usuario);
-        dataSource.setPassword(senha);
-        return dataSource;
-
-    }*/
 
     @Bean
     public TokenStore tokenStore() {
