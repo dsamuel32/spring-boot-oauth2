@@ -1,0 +1,8 @@
+server:
+    port: 8443
+    servlet:
+           context-path: /autenticacao
+    ssl:
+           key-store: classpath:keystore.jks
+           key-store-password: password
+           key-password: password

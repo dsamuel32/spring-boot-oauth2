@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
+//@Controller
 public class TokenController {
 
-    @Resource(name = "tokenServices")
+    /*@Resource(name = "tokenServices")
     ConsumerTokenServices tokenServices;
 
     @Resource(name = "tokenStore")
@@ -52,6 +52,6 @@ public class TokenController {
             ((JdbcTokenStore) tokenStore).removeRefreshToken(tokenId);
         }
         return tokenId;
-    }
+    }*/
 
 }

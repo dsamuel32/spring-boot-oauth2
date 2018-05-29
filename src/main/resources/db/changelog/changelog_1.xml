@@ -81,4 +81,36 @@
 
     </changeSet>
 
+    <changeSet id="2" author="diego">
+        <sql>
+            CREATE TABLE api.tb_usuario (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            login VARCHAR(255) NOT NULL,
+            nome VARCHAR(255) NOT NULL,
+            senha VARCHAR(255) NOT NULL,
+            PRIMARY KEY (id),
+            UNIQUE INDEX idx_login (login)
+            );
+        </sql>
+
+        <sql>
+            CREATE TABLE api.tb_permissao (
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            descricao VARCHAR(255) NOT NULL,
+            PRIMARY KEY (id)
+            )
+        </sql>
+
+        <sql>
+            CREATE TABLE api.tb_usuario_permissao (
+                id_usuario INT(11) NOT NULL,
+                id_permissao INT(11) NOT NULL,
+                PRIMARY KEY (id_usuario, id_permissao),
+                INDEX fk_permissao (id_permissao),
+                CONSTRAINT FK_apcc8lxk2xnug8377fatvbn04 FOREIGN KEY (id_usuario) REFERENCES api.tb_usuario (id),
+                CONSTRAINT FK_it77eq964jhfqtu54081ebtio FOREIGN KEY (id_permissao) REFERENCES api.tb_permissao (id)
+            );
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
