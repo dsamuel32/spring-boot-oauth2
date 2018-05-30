@@ -19,4 +19,5 @@ public class Application extends SpringBootServletInitializer {
 //https://github.com/savicprvoslav/Spring-Boot-starter
 // http://www.baeldung.com/rest-api-spring-oauth2-angularjs
     //http://projects.spring.io/spring-security-oauth/docs/oauth2.html
+    //https://dzone.com/articles/secure-spring-rest-with-spring-security-and-oauth2
 }
