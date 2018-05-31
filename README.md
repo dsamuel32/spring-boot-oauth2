@@ -1,4 +1,4 @@
-### Spring-Boot-Oauth2 - Spring Boot/Spring Security (DOCUMENTAÇÃO DESATUALIZADA)
+### Spring-Boot-Oauth2 - Spring Boot/Spring Security (DOCUMENTAÇÃO )
 Exemplo de aplicação REST com autenticação OAUTH2.
 
 - Tecnologias Utilizadas
@@ -8,7 +8,8 @@ Exemplo de aplicação REST com autenticação OAUTH2.
 - Spring MVC
 - Spring Data JPA
 - Liquibase
-- Swagger
+- ModelMapper
+- Swagger(Pendente)
 - Mysql
 
 ###Instruções
@@ -23,21 +24,19 @@ mv clean install spring-boot:run
 
 - Efetue uma requisição para o endpont público:
 ```sh
-curl http://localhost:8080/autenticacao/publico
+curl http://localhost:8080/autenticacao/publico/home
 ```
 Resposta
 ```sh
 {
-  "resultado": "Você não precisa estar logado",
-  "erros": [],
-  "mensagens": []
+  "Pagina": "Página sem segurança!!!!"
 }
 ```
 
 - Efetue uma requisição para o endpont protegido:
 
 ```sh
-curl http://localhost:8080/autenticacao/home
+curl http://localhost:8080/autenticacao/v1/usuario
 ```
 Resposta 
 ```sh
@@ -49,7 +48,8 @@ Resposta
 
 - Endpoint de autentição
 ```sh
-curl -X POST -vu clientapp:123456 http://localhost:8080/autenticacao/oauth/token -H "Accept: application/json" -d "password=123&username=teste1&grant_type=password&scope=read%20write&client_secret=123456&client_id=clientapp"
+curl -X POST -vu clientapp:123456 http://localhost:8080/autenticacao/oauth/token -H "Accept: application/json" -d "password=123&username=teste&grant_type=password&scope=read%20write&client_secret=123456&client_id=clientapp"
+
 ```
 
 Resposta
@@ -65,9 +65,22 @@ Resposta
 
 - Use o access_token para se autenticar
 ```sh
-curl http://localhost:8080/autenticacao/home -H "Authorization: Bearer ff16372e-38a7-4e29-88c2-1fb92897f558"
+curl http://localhost:8080/autenticacao/v1/usuario -H "Authorization: Bearer ff16372e-38a7-4e29-88c2-1fb92897f558"
 ```
-
+Resposta 
+```sh
+{
+    "nome": "teste",
+    "userName": "teste",
+    "enabled": true,
+    "permissoes": [
+        {
+            "id": 1,
+            "descricao": "ADM"
+        }
+    ]
+}
+```
 
 
 

@@ -1,7 +1,9 @@
 package br.com.diego.springplayground.service;
 
 import br.com.diego.springplayground.domain.Usuario;
+import br.com.diego.springplayground.domain.dto.UsuarioDTO;
 import br.com.diego.springplayground.repository.UsuarioRepository;
+import br.com.diego.springplayground.utils.ModelMapperConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -19,6 +21,8 @@ public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private ModelMapperConverter modelMapperConverter;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -29,10 +33,11 @@ public class UsuarioService implements UserDetailsService {
         return usuario;
     }
 
-    public Usuario getUsuarioLogado() {
+    public UsuarioDTO getUsuarioLogado() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication  authentication = securityContext.getAuthentication();
-        return (Usuario) authentication.getPrincipal();
+        Usuario usuario = (Usuario) authentication.getPrincipal();
+        return modelMapperConverter.converterStrict(usuario, UsuarioDTO.class);
     }
 
 }
