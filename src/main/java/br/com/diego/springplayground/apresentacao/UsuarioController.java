@@ -1,5 +1,8 @@
 package br.com.diego.springplayground.apresentacao;
 
+import br.com.diego.springplayground.domain.Usuario;
+import br.com.diego.springplayground.service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +16,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "usuario", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UserRestController {
+@RequestMapping(value = "v1/usuario", produces = MediaType.APPLICATION_JSON_VALUE)
+public class UsuarioController {
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @PreAuthorize("#oauth2.hasScope('read')")
-    @GetMapping(value = "{id}")
-    public ResponseEntity<Map<String, Long>> getUsuario(@PathVariable("id") Long id) {
-        Map<String, Long> resposta = new HashMap<>();
-        resposta.put("usuario", id);
-        return new ResponseEntity<>(resposta, HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<Usuario> getUsuarioLogado() {
+        Usuario usuario = usuarioService.getUsuarioLogado();
+        return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
 }

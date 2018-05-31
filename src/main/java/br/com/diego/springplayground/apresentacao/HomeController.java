@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "publico/home", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "v1/publico/home", produces = MediaType.APPLICATION_JSON_VALUE)
 public class HomeController {
 
-    @GetMapping(value = "{id}")
+    @GetMapping()
     public ResponseEntity<Map<String, String>> teste() {
         Map<String, String> resposta = new HashMap<>();
-        resposta.put("pagina", "home");
+        resposta.put("pagina", "Página sem segurança!!!!");
         return new ResponseEntity<>(resposta, HttpStatus.OK);
     }
 
