@@ -1,0 +1,77 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+
+    <changeSet id="1" author="diego">
+        <createTable tableName="tb_usuario" schemaName="acessos">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_name" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="nome" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="account_non_expired" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="account_non_locked" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="credentials_non_expired" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint constraintName="uk_user_name"
+                             schemaName="acessos"
+                             columnNames="user_name"
+                             tableName="tb_usuario"/>
+
+    </changeSet>
+    <changeSet id="2" author="diego">
+        <createTable tableName="tb_permissao" schemaName="acessos">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="descricao" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="diego">
+        <createTable tableName="tb_usuario_permissao" schemaName="acessos">
+            <column name="id_usuario" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+            <column name="id_permissao" type="bigint">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addPrimaryKey columnNames="id_usuario, id_permissao"
+                       constraintName="pk_usuario_permissao"
+                       schemaName="acessos"
+                       tableName="tb_usuario_permissao"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_usuario"
+                                 baseTableName="tb_usuario_permissao"
+                                 constraintName="fk_usuario_permissao"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tb_usuario"/>
+
+        <addForeignKeyConstraint baseColumnNames="id_permissao"
+                                 baseTableName="tb_usuario_permissao"
+                                 constraintName="fk_usuario_permissao_permissao"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tb_permissao"/>
+    </changeSet>
+</databaseChangeLog>

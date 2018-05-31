@@ -7,7 +7,7 @@ spring:
     profiles:
            active: dev
     datasource:
-            url: jdbc:mysql://localhost:3306/api
+            url: jdbc:mysql://localhost:3306/acessos
             username: root
             password: root
             driver-class-name: com.mysql.jdbc.Driver
@@ -21,7 +21,7 @@ spring:
     liquibase:
         change-log: classpath:db/changelog-master.xml
         enabled: true
-        default-schema: api
+        default-schema: acessos
         user: ${spring.datasource.username}
         password: ${spring.datasource.password}
 

@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "tb_usuario", schema = "api")
+@Table(name = "tb_usuario", schema = "acessos")
 public class Usuario implements UserDetails, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,18 +21,30 @@ public class Usuario implements UserDetails, Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "login", unique = true)
-    private String login;
+    @Column(name = "user_name", unique = true)
+    private String userName;
 
-    @Column(name = "senha", length = 60)
-    private String senha;
+    @Column(name = "password", length = 60)
+    private String password;
 
     @Column(name = "nome")
     private String nome;
 
+    @Column(name = "account_non_expired")
+    private Boolean accountNonExpired;
+
+    @Column(name = "account_non_locked")
+    private Boolean accountNonLocked;
+
+    @Column(name = "credentials_non_expired")
+    private Boolean credentialsNonExpired;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
+
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_usuario_permissao", schema = "api", joinColumns = { @JoinColumn(name = "id_usuario") },
+    @JoinTable(name = "tb_usuario_permissao", schema = "acessos", joinColumns = { @JoinColumn(name = "id_usuario") },
             inverseJoinColumns = { @JoinColumn(name = "id_permissao") })
     private Set<Permissao> permissoes;
 
@@ -48,20 +60,16 @@ public class Usuario implements UserDetails, Serializable {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNome() {
@@ -72,6 +80,38 @@ public class Usuario implements UserDetails, Serializable {
         this.nome = nome;
     }
 
+    public Boolean getAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(Boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    public Boolean getAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(Boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public Boolean getCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(Boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public Set<Permissao> getPermissoes() {
         return permissoes;
     }
@@ -80,39 +120,38 @@ public class Usuario implements UserDetails, Serializable {
         this.permissoes = permissoes;
     }
 
-
     @Override
-    public Set<? extends GrantedAuthority> getAuthorities() {
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.permissoes;
     }
 
     @Override
     public String getPassword() {
-        return this.senha;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return this.login;
+        return this.userName;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return this.accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return this.credentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 }

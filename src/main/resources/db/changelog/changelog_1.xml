@@ -4,113 +4,90 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
     <changeSet id="1" author="diego">
+        <createTable tableName="oauth_client_details" schemaName="acessos">
+            <column name="client_id" type="varchar(255)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="resource_ids" type="varchar(255)" />
+            <column name="client_secret" type="varchar(255)" />
+            <column name="scope" type="varchar(255)" />
+            <column name="authorized_grant_types" type="varchar(255)" />
+            <column name="web_server_redirect_uri" type="varchar(255)" />
+            <column name="authorities" type="varchar(255)" />
+            <column name="access_token_validity" type="bigint" />
+            <column name="refresh_token_validity" type="bigint" />
+            <column name="additional_information" type="varchar(4096)" />
+            <column name="autoapprove" type="varchar(255)" />
+        </createTable>
 
-        <sql>
-            drop table if exists api.oauth_client_details;
-            create table api.oauth_client_details (
-            client_id VARCHAR(255) PRIMARY KEY,
-            resource_ids VARCHAR(255),
-            client_secret VARCHAR(255),
-            scope VARCHAR(255),
-            authorized_grant_types VARCHAR(255),
-            web_server_redirect_uri VARCHAR(255),
-            authorities VARCHAR(255),
-            access_token_validity INTEGER,
-            refresh_token_validity INTEGER,
-            additional_information VARCHAR(4096),
-            autoapprove VARCHAR(255)
-            );
-
-            drop table if exists api.oauth_client_token;
-            create table api.oauth_client_token (
-            token_id VARCHAR(255),
-            token LONG VARBINARY,
-            authentication_id VARCHAR(255) PRIMARY KEY,
-            user_name VARCHAR(255),
-            client_id VARCHAR(255)
-            );
-
-            drop table if exists api.oauth_access_token;
-            create table api.oauth_access_token (
-            token_id VARCHAR(255),
-            token LONG VARBINARY,
-            authentication_id VARCHAR(255) PRIMARY KEY,
-            user_name VARCHAR(255),
-            client_id VARCHAR(255),
-            authentication LONG VARBINARY,
-            refresh_token VARCHAR(255)
-            );
-
-            drop table if exists api.oauth_refresh_token;
-            create table api.oauth_refresh_token (
-            token_id VARCHAR(255),
-            token LONG VARBINARY,
-            authentication LONG VARBINARY
-            );
-
-            drop table if exists api.oauth_code;
-            create table api.oauth_code (
-            code VARCHAR(255), authentication LONG VARBINARY
-            );
-
-            drop table if exists api.oauth_approvals;
-            create table api.oauth_approvals (
-            userId VARCHAR(255),
-            clientId VARCHAR(255),
-            scope VARCHAR(255),
-            status VARCHAR(10),
-            expiresAt TIMESTAMP,
-            lastModifiedAt TIMESTAMP
-            );
-
-            drop table if exists api.ClientDetails;
-            create table api.ClientDetails (
-            appId VARCHAR(255) PRIMARY KEY,
-            resourceIds VARCHAR(255),
-            appSecret VARCHAR(255),
-            scope VARCHAR(255),
-            grantTypes VARCHAR(255),
-            redirectUrl VARCHAR(255),
-            authorities VARCHAR(255),
-            access_token_validity INTEGER,
-            refresh_token_validity INTEGER,
-            additionalInformation VARCHAR(4096),
-            autoApproveScopes VARCHAR(255)
-            );
-        </sql>
-
+        <addUniqueConstraint constraintName="uk_client_id_oauth_client_details"
+                             schemaName="acessos"
+                             columnNames="client_id"
+                             tableName="oauth_client_details"/>
     </changeSet>
-
     <changeSet id="2" author="diego">
-        <sql>
-            CREATE TABLE api.tb_usuario (
-            id INT(11) NOT NULL AUTO_INCREMENT,
-            login VARCHAR(255) NOT NULL,
-            nome VARCHAR(255) NOT NULL,
-            senha VARCHAR(255) NOT NULL,
-            PRIMARY KEY (id),
-            UNIQUE INDEX idx_login (login)
-            );
-        </sql>
-
-        <sql>
-            CREATE TABLE api.tb_permissao (
-            id INT(11) NOT NULL AUTO_INCREMENT,
-            descricao VARCHAR(255) NOT NULL,
-            PRIMARY KEY (id)
-            )
-        </sql>
-
-        <sql>
-            CREATE TABLE api.tb_usuario_permissao (
-                id_usuario INT(11) NOT NULL,
-                id_permissao INT(11) NOT NULL,
-                PRIMARY KEY (id_usuario, id_permissao),
-                INDEX fk_permissao (id_permissao),
-                CONSTRAINT FK_apcc8lxk2xnug8377fatvbn04 FOREIGN KEY (id_usuario) REFERENCES api.tb_usuario (id),
-                CONSTRAINT FK_it77eq964jhfqtu54081ebtio FOREIGN KEY (id_permissao) REFERENCES api.tb_permissao (id)
-            );
-        </sql>
+        <createTable tableName="oauth_client_token" schemaName="acessos">
+            <column name="authentication_id" type="varchar(255)" >
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="token_id" type="varchar(255)"/>
+            <column name="token" type="blob" />
+            <column name="user_name" type="varchar(255)" />
+            <column name="client_id" type="varchar(255)" />
+        </createTable>
     </changeSet>
+    <changeSet id="3" author="diego">
+       <createTable tableName="oauth_access_token" schemaName="acessos">
+           <column name="authentication_id" type="varchar(255)">
+               <constraints primaryKey="true"/>
+           </column>
+           <column name="token_id" type="varchar(255)"/>
+           <column name="token" type="blob"/>
+           <column name="user_name" type="varchar(255)"/>
+           <column name="client_id" type="varchar(255)"/>
+           <column name="authentication" type="blob"/>
+           <column name="refresh_token" type="varchar(255)"/>
+       </createTable>
+    </changeSet>
+    <changeSet id="4" author="diego">
+       <createTable tableName="oauth_refresh_token" schemaName="acessos">
+           <column name="token_id" type="varchar(255)"/>
+           <column name="token" type="blob"/>
+           <column name="authentication" type="blob"/>
+       </createTable>
+    </changeSet>
+    <changeSet id="5" author="diego">
+       <createTable tableName="oauth_code" schemaName="acessos">
+           <column name="code" type="varchar(255)"/>
+           <column name="authentication" type="blob"/>
+       </createTable>
+   </changeSet>
+   <changeSet id="6" author="diego">
+       <createTable tableName="oauth_approvals" schemaName="acessos">
+           <column name="userId" type="varchar(255)"/>
+           <column name="clientId" type="varchar(255)"/>
+           <column name="scope" type="varchar(255)"/>
+           <column name="status" type="varchar(10)"/>
+           <column name="expiresAt" type="datetime"/>
+           <column name="lastModifiedAt" type="datetime"/>
+       </createTable>
+   </changeSet>
+   <changeSet id="7" author="diego">
+       <createTable tableName="ClientDetails" schemaName="acessos">
+           <column name="appId" type="varchar(255)">
+               <constraints primaryKey="true"/>
+           </column>
+           <column name="resourceIds" type="varchar(255)"/>
+           <column name="appSecret" type="varchar(255)"/>
+           <column name="scope" type="varchar(255)"/>
+           <column name="grantTypes" type="varchar(255)"/>
+           <column name="redirectUrl" type="varchar(255)"/>
+           <column name="authorities" type="varchar(255)"/>
+           <column name="access_token_validity" type="bigint"/>
+           <column name="refresh_token_validity" type="bigint"/>
+           <column name="additionalInformation" type="varchar(4096)"/>
+           <column name="autoApproveScopes" type="varchar(255)"/>
+       </createTable>
+   </changeSet>
 
 </databaseChangeLog>

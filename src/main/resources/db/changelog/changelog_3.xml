@@ -1,0 +1,40 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+    <changeSet id="1" author="diego">
+        <insert schemaName="acessos" tableName="tb_usuario">
+            <column name="user_name" value="teste"/>
+            <column name="nome" value="teste"/>
+            <column name="password" value="123"/>
+            <column name="account_non_expired" valueBoolean="true"/>
+            <column name="account_non_locked" valueBoolean="true"/>
+            <column name="credentials_non_expired" valueBoolean="true"/>
+            <column name="enabled" valueBoolean="true"/>
+        </insert>
+    </changeSet>
+    <changeSet id="2" author="diego">
+        <insert schemaName="acessos" tableName="tb_permissao">
+            <column name="id" value="1"/>
+            <column name="descricao" value="ADM"/>
+        </insert>
+    </changeSet>
+    <changeSet id="3" author="diego">
+        <insert schemaName="acessos" tableName="tb_usuario_permissao">
+            <column name="id_usuario" value="1"/>
+            <column name="id_permissao" value="1"/>
+        </insert>
+    </changeSet>
+    <changeSet id="4" author="diego">
+        <insert schemaName="acessos" tableName="oauth_client_details">
+            <column name="client_id" value="clientapp"/>
+            <column name="client_secret" value="123456"/>
+            <column name="scope" value="read,write"/>
+            <column name="authorized_grant_types" value="password,refresh_token"/>
+            <column name="authorities" value="ADMIN"/>
+            <column name="autoapprove" value="true"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

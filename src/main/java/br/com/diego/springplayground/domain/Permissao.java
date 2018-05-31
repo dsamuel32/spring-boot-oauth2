@@ -6,11 +6,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "tb_permissao", schema = "api")
+@Table(name = "tb_permissao", schema = "acessos")
 public class Permissao implements GrantedAuthority, Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
