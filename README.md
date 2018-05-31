@@ -1,4 +1,4 @@
-### Spring-Boot-Oauth2 - Spring Boot/Spring Security (DOCUMENTAÇÃO )
+### Spring-Boot-Oauth2 - Spring Boot/Spring Security
 Exemplo de aplicação REST com autenticação OAUTH2.
 
 - Tecnologias Utilizadas
@@ -12,15 +12,15 @@ Exemplo de aplicação REST com autenticação OAUTH2.
 - Swagger(Pendente)
 - Mysql
 
-###Instruções
+### Instruções
 
-- Criar um schema chamado autenticacao;
+- Criar um schema chamado acessos;
 
 - E executar o comando 
 
 mv clean install spring-boot:run
 ```
-###Usando o projeto
+### Chamando as APIs
 
 - Efetue uma requisição para o endpont público:
 ```sh
