@@ -18,6 +18,9 @@ Exemplo de aplicação REST com autenticação OAUTH2.
 
 - E executar o comando 
 
+### Build/Start do sistema
+
+```
 mv clean install spring-boot:run
 ```
 ### Chamando as APIs
