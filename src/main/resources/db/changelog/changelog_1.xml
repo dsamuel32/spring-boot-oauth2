@@ -73,7 +73,7 @@
        </createTable>
    </changeSet>
    <changeSet id="7" author="diego">
-       <createTable tableName="ClientDetails" schemaName="acessos">
+       <createTable tableName="clientdetails" schemaName="acessos">
            <column name="appId" type="varchar(255)">
                <constraints primaryKey="true"/>
            </column>
